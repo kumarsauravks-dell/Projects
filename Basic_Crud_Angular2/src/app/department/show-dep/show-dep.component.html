@@ -1,0 +1,57 @@
+<div class="d-flex con">
+    <h2 class="px-2 m-2">Manage Department</h2>
+    <button type="button" (click)="addClick()" class="btn btn-primary m-2" data-bs-toggle="modal"
+    data-bs-target="#staticBackdrop">
+    Add Department
+</button>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>            
+            <th>
+                <div class="d-flex flex-row">
+                    <input [(ngModel)]="DepartmentIdFilter" class="form-control" (keyup)="FilterFn()" placeholder="Filter By Id">
+                    <button class="btn btn-secondary m-1" (click)="sortResult('DepartmentId',true)"><i class="fa-solid fa-arrow-up-wide-short"></i></button>
+                    <button class="btn btn-secondary m-1" (click)="sortResult('DepartmentId',false)"><i class="fa-solid fa-arrow-down-short-wide"></i></button>
+                </div>
+                Department Id
+            </th>
+            <th>
+                <div class="d-flex flex-row">
+                    <input [(ngModel)]="DepartmentNameFilter" class="form-control" (keyup)="FilterFn()" placeholder="Filter By Name">
+                    <button class="btn btn-secondary m-1" (click)="sortResult('DepartmentName',true)"><i class="fa-solid fa-arrow-up-wide-short"></i></button>
+                    <button class="btn btn-secondary m-1" (click)="sortResult('DepartmentName',false)"><i class="fa-solid fa-arrow-down-short-wide"></i></button>
+                </div>
+                Department Name
+            </th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let department of DepartmentList">
+            <td>{{department.DepartmentId}}</td>
+            <td>{{department.DepartmentName}}</td>
+            <td>
+                <button class="btn btn-light mr-1" (click)="editClick(department)" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"><i class="fa-regular fa-pen-to-square"></i></button>
+                <button class="btn btn-light mr-1" (click)="deleteClick(department)"><i
+                        class="fa-solid fa-trash"></i></button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">{{ModalTitle}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="closeClick()"></button>
+            </div>
+            <div class="modal-body">
+                <app-add-edit-dep [dep]="dep" *ngIf="ActivateAddEditDepComp"></app-add-edit-dep>
+            </div>
+        </div>
+    </div>
+</div>
